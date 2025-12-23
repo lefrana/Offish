@@ -30,6 +30,8 @@
 *.VC.opendb
 .vscode/
 .idea/
+.vs/
+.vsconfig
 
 # --- OS Files ---
 .DS_Store
