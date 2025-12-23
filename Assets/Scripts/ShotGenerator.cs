@@ -12,7 +12,7 @@ public class ShotGenerator : MonoBehaviour
 
     void Start()
     {
-        SpawnKeys();
+        //SpawnKeys();
     }
 
     void Update()
@@ -46,12 +46,12 @@ public class ShotGenerator : MonoBehaviour
         }
     }
 
-    void SpawnKeys()
+    public void SpawnKeys()
     {
         arrowKey = new ArrowKey[keyMax];
 
         Vector2 basePos = new Vector2(3.0f, 4.3f);
-        float spacing = 1.2f;
+        float spacing = 1.0f;
 
         for (int i = 0; i < keyMax; i++)
         {
