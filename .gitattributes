@@ -1,0 +1,7 @@
+# Mark all C# scripts as C#
+Assets/Scripts/**/*.cs linguist-language=C#
+
+# Ignore Unity non-code files so they don’t affect language stats
+*.meta linguist-vendored
+*.unity linguist-vendored
+*.prefab linguist-vendored

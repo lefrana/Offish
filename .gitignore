@@ -1,0 +1,49 @@
+# --- Unity Folders ---
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Logs]/
+/[MemoryCaptures]/
+/[UserSettings]/
+
+# --- Asset Store ---
+/[Aa]ssets/AssetStoreTools*
+
+# --- IDE Files (VS/Rider/VSCode) ---
+[Vv]isual[Ss]tudio.csproj
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svclog
+*.pdb
+*.opendb
+*.IDB
+*.VC.db
+*.VC.opendb
+.vscode/
+.idea/
+
+# --- OS Files ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# --- Crashlytics ---
+sysinfo.txt
+
+# --- Builds ---
+*.apk
+*.unitypackage
+*.app

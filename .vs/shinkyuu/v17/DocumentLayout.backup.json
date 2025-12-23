@@ -1,0 +1,157 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\GameDev\\Offish\\shinkyuu\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{33C7E625-73E0-FD29-80BD-E78A6F664474}|Assembly-CSharp.csproj|D:\\GameDev\\Offish\\shinkyuu\\assets\\scripts\\dialogue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33C7E625-73E0-FD29-80BD-E78A6F664474}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\dialogue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33C7E625-73E0-FD29-80BD-E78A6F664474}|Assembly-CSharp.csproj|d:\\gamedev\\offish\\shinkyuu\\assets\\scripts\\levelmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33C7E625-73E0-FD29-80BD-E78A6F664474}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\levelmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33C7E625-73E0-FD29-80BD-E78A6F664474}|Assembly-CSharp.csproj|D:\\GameDev\\Offish\\shinkyuu\\assets\\scripts\\shotgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33C7E625-73E0-FD29-80BD-E78A6F664474}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\shotgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33C7E625-73E0-FD29-80BD-E78A6F664474}|Assembly-CSharp.csproj|D:\\GameDev\\Offish\\shinkyuu\\assets\\scripts\\bubblescript.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33C7E625-73E0-FD29-80BD-E78A6F664474}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\bubblescript.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33C7E625-73E0-FD29-80BD-E78A6F664474}|Assembly-CSharp.csproj|d:\\gamedev\\offish\\shinkyuu\\assets\\scripts\\bubblegenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33C7E625-73E0-FD29-80BD-E78A6F664474}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\bubblegenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33C7E625-73E0-FD29-80BD-E78A6F664474}|Assembly-CSharp.csproj|D:\\GameDev\\Offish\\shinkyuu\\assets\\scripts\\shotcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33C7E625-73E0-FD29-80BD-E78A6F664474}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\shotcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33C7E625-73E0-FD29-80BD-E78A6F664474}|Assembly-CSharp.csproj|D:\\GameDev\\Offish\\shinkyuu\\assets\\scripts\\arrowkey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33C7E625-73E0-FD29-80BD-E78A6F664474}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\arrowkey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33C7E625-73E0-FD29-80BD-E78A6F664474}|Assembly-CSharp.csproj|D:\\GameDev\\Offish\\shinkyuu\\assets\\scripts\\bubblekey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33C7E625-73E0-FD29-80BD-E78A6F664474}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\bubblekey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LevelManager.cs",
+              "DocumentMoniker": "D:\\GameDev\\Offish\\shinkyuu\\Assets\\Scripts\\LevelManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\LevelManager.cs",
+              "ToolTip": "D:\\GameDev\\Offish\\shinkyuu\\Assets\\Scripts\\LevelManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\LevelManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T01:32:52.215Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BubbleScript.cs",
+              "DocumentMoniker": "D:\\GameDev\\Offish\\shinkyuu\\Assets\\Scripts\\BubbleScript.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\BubbleScript.cs",
+              "ToolTip": "D:\\GameDev\\Offish\\shinkyuu\\Assets\\Scripts\\BubbleScript.cs",
+              "RelativeToolTip": "Assets\\Scripts\\BubbleScript.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T01:19:40.252Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ShotGenerator.cs",
+              "DocumentMoniker": "D:\\GameDev\\Offish\\shinkyuu\\Assets\\Scripts\\ShotGenerator.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ShotGenerator.cs",
+              "ToolTip": "D:\\GameDev\\Offish\\shinkyuu\\Assets\\Scripts\\ShotGenerator.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ShotGenerator.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAiwCgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-17T02:19:33.131Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ArrowKey.cs",
+              "DocumentMoniker": "D:\\GameDev\\Offish\\shinkyuu\\Assets\\Scripts\\ArrowKey.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ArrowKey.cs",
+              "ToolTip": "D:\\GameDev\\Offish\\shinkyuu\\Assets\\Scripts\\ArrowKey.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ArrowKey.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T01:15:09.091Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BubbleKey.cs",
+              "DocumentMoniker": "D:\\GameDev\\Offish\\shinkyuu\\Assets\\Scripts\\BubbleKey.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\BubbleKey.cs",
+              "ToolTip": "D:\\GameDev\\Offish\\shinkyuu\\Assets\\Scripts\\BubbleKey.cs",
+              "RelativeToolTip": "Assets\\Scripts\\BubbleKey.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T01:06:56.838Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Dialogue.cs",
+              "DocumentMoniker": "D:\\GameDev\\Offish\\shinkyuu\\Assets\\Scripts\\Dialogue.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Dialogue.cs",
+              "ToolTip": "D:\\GameDev\\Offish\\shinkyuu\\Assets\\Scripts\\Dialogue.cs*",
+              "RelativeToolTip": "Assets\\Scripts\\Dialogue.cs*",
+              "ViewState": "AgIAACEAAAAAAAAAAAAiwCYAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T04:37:15.112Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ShotController.cs",
+              "DocumentMoniker": "D:\\GameDev\\Offish\\shinkyuu\\Assets\\Scripts\\ShotController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ShotController.cs",
+              "ToolTip": "D:\\GameDev\\Offish\\shinkyuu\\Assets\\Scripts\\ShotController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ShotController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-19T01:25:04.545Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BubbleGenerator.cs",
+              "DocumentMoniker": "D:\\GameDev\\Offish\\shinkyuu\\Assets\\Scripts\\BubbleGenerator.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\BubbleGenerator.cs",
+              "ToolTip": "D:\\GameDev\\Offish\\shinkyuu\\Assets\\Scripts\\BubbleGenerator.cs",
+              "RelativeToolTip": "Assets\\Scripts\\BubbleGenerator.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAowDcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-17T00:55:03.472Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
