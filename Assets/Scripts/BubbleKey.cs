@@ -12,7 +12,6 @@ public class BubbleKey : MonoBehaviour
 {
     public BubbleType type;
 
-
     void Start()
     {
         
@@ -23,4 +22,5 @@ public class BubbleKey : MonoBehaviour
     {
         
     }
+
 }

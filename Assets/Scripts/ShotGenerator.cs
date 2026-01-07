@@ -29,7 +29,7 @@ public class ShotGenerator : MonoBehaviour
             return;
         }
 
-        ArrowType? input = GetInput();
+        ArrowType? input = GetInput(); //nullable enum, reads keyboard input
         if (input == null)
         {
             return;
@@ -64,7 +64,6 @@ public class ShotGenerator : MonoBehaviour
             ArrowKey arrow = obj.GetComponent<ArrowKey>();
             arrow.type = type;
             arrowKey[i] = arrow;
-            Debug.Log(type);
         }
     }
 

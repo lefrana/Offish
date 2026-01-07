@@ -27,7 +27,7 @@ public class LevelManager : MonoBehaviour
 
     void SpawnBubbles()
     {
-        for(int i = 0;i<bubblePrefabs.Length;++i)
+        for (int i = 0; i < bubblePrefabs.Length; ++i)
         {
             Instantiate(bubblePrefabs[i]);
         }

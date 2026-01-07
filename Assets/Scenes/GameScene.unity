@@ -380,7 +380,7 @@ MonoBehaviour:
   keyDownPrefab: {fileID: 8445839618708720408, guid: 0aa9e43fd2cdef747a8e2a26b3a375e4, type: 3}
   keyLeftPrefab: {fileID: 1241480944535077500, guid: 620c74339ff459644a1ca2270d5414f1, type: 3}
   keyRightPrefab: {fileID: 3138685993169377289, guid: 6198ed5b654dff242a17ab5c4ba9c901, type: 3}
-  shotPrefab: {fileID: 123602530808578690, guid: 10816c6e3d041ae47bb6345996d72d48, type: 3}
+  shotPrefab: {fileID: 3396252577044670111, guid: 3d6c56a8c88b29a468ca0a3153fb28b2, type: 3}
   keyMax: 4
 --- !u!4 &507814070
 Transform:
@@ -565,9 +565,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue: {fileID: 145160697}
   bubblePrefabs:
-  - {fileID: 2959990547310806955, guid: da4e2ac950d80d8488f9765d630a8477, type: 3}
-  - {fileID: 7357995433151397246, guid: aba23c6f19d6fb348abb5ed6c2839b32, type: 3}
-  - {fileID: 2090243126228885771, guid: 4f1c7a1bb85b5114bb8d272659a33635, type: 3}
+  - {fileID: 2090243126228885771, guid: acc506889e8318a4f863cb225403fe02, type: 3}
+  - {fileID: 2690014793721450344, guid: b3d0baaa9a8cd544aba6fa7707c68740, type: 3}
+  - {fileID: 2464288220840673303, guid: 203f7413243886c46947db92fcffbb35, type: 3}
+  - {fileID: 6547747072780341256, guid: dc9e2564fdfe01743b5a796c0afe7ba6, type: 3}
   shotGenerator: {fileID: 507814069}
 --- !u!4 &540350513
 Transform:
