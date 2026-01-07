@@ -10,10 +10,11 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        StartLevel();
+        StartingDialogue();
+        Invoke("StartLevel", 5.0f);
     }
 
-    void StartLevel()
+    void StartingDialogue()
     {
         dialogue.SetDialogue(new string[]
         {
@@ -21,6 +22,10 @@ public class LevelManager : MonoBehaviour
             "testing second dialogue line",
             "テストにさんハッピーはっぴあああああああああああああああ?!",
         });
+    }
+
+    void StartLevel()
+    {
 
         npcDialogue.SetDialogue(new string[]
         {
