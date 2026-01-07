@@ -3,6 +3,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public Dialogue dialogue;
+    public NPCDialogue npcDialogue;
     public GameObject[] bubblePrefabs;
     public ShotGenerator shotGenerator;
 
@@ -18,6 +19,11 @@ public class LevelManager : MonoBehaviour
             "testing level start",
             "testing second dialogue line",
             "テストにさんハッピーはっぴあああああああああああああああ?!",
+        });
+
+        npcDialogue.SetDialogue(new string[]
+        {
+            "testing NPC dialogue",
         });
 
         SpawnBubbles();

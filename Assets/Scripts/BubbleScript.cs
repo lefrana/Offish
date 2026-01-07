@@ -19,7 +19,6 @@ public class BubbleScript : MonoBehaviour
         dialogue = Object.FindFirstObjectByType<Dialogue>();
     }
 
-    // Update is called once per frame
     void Update()
     {
 
