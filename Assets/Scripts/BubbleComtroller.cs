@@ -1,22 +1,26 @@
 using TMPro;
 using UnityEngine;
 
+public enum BubbleType { Correct, False1, False2, False3 }
+
 public class BubbleController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("movement")]
     public float moveSpeed = 3.0f;
     private Rigidbody2D rb;
 
     private bool shotInside = false;
-    private BubbleScript bubbleScript;
+    //private BubbleScript bubbleScript;
 
     private SpriteRenderer spriteRenderer;
+
+    public BubbleType type;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.linearVelocity = Random.insideUnitCircle.normalized * moveSpeed;
-        bubbleScript = GetComponent<BubbleScript>();
+        //bubbleScript = GetComponent<BubbleScript>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -29,9 +33,23 @@ public class BubbleController : MonoBehaviour
         {
             if(isOnTop())
             {
-                bubbleScript.ShowText();
+                ShowText();
                 Destroy(gameObject);
             }
+        }
+    }
+
+    void ShowText()
+    {
+        LevelManager manager = Object.FindFirstObjectByType<LevelManager>();
+
+        if (manager != null)
+        {
+            manager.CheckAnswer(type);
+        }
+        else
+        {
+            Debug.LogError("LevelManager not found");
         }
     }
 

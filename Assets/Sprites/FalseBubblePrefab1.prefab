@@ -272,8 +272,6 @@ GameObject:
   - component: {fileID: 5936625132673659688}
   - component: {fileID: 946383193432688229}
   - component: {fileID: 6544889903035454705}
-  - component: {fileID: 6462714255693562646}
-  - component: {fileID: 8145360218911671906}
   - component: {fileID: 8130232465441784680}
   m_Layer: 6
   m_Name: FalseBubblePrefab1
@@ -371,6 +369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+  type: 1
 --- !u!50 &5936625132673659688
 Rigidbody2D:
   serializedVersion: 5
@@ -452,31 +451,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2690014793721450344}
   m_CullTransparentMesh: 1
---- !u!114 &6462714255693562646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2690014793721450344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9bae5d54624e644188f5969d750d7d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 1
---- !u!114 &8145360218911671906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2690014793721450344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bcfd397345b96d4c97e771eeb67dce8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!210 &8130232465441784680
 SortingGroup:
   m_ObjectHideFlags: 0

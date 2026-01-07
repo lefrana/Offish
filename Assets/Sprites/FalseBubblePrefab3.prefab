@@ -14,8 +14,6 @@ GameObject:
   - component: {fileID: 6219774818031129348}
   - component: {fileID: 4366103674273475753}
   - component: {fileID: 7149235439215604433}
-  - component: {fileID: 6315097724586579342}
-  - component: {fileID: 7905604773943017828}
   - component: {fileID: 535950428218553224}
   m_Layer: 6
   m_Name: FalseBubblePrefab3
@@ -113,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
+  type: 3
 --- !u!50 &6219774818031129348
 Rigidbody2D:
   serializedVersion: 5
@@ -194,31 +193,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6547747072780341256}
   m_CullTransparentMesh: 1
---- !u!114 &6315097724586579342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6547747072780341256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9bae5d54624e644188f5969d750d7d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 3
---- !u!114 &7905604773943017828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6547747072780341256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bcfd397345b96d4c97e771eeb67dce8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!210 &535950428218553224
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -415,7 +389,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: FALSE4
+  m_text: FALSE3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ecabf3a483aa1c94b817a2a9e3dea0e0, type: 2}
   m_sharedMaterial: {fileID: 7848936653596951286, guid: ecabf3a483aa1c94b817a2a9e3dea0e0, type: 2}
