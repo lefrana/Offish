@@ -103,6 +103,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  isShot: 0
+  shotGenerator: {fileID: 0}
 --- !u!68 &3118519211373514977
 EdgeCollider2D:
   m_ObjectHideFlags: 0
