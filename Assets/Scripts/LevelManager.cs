@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class LevelManager : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         StartingDialogue();
-        Invoke("StartLevel", 5.0f);
+        Invoke("StartLevel", 1.0f);
     }
 
     void StartingDialogue()
@@ -32,16 +33,45 @@ public class LevelManager : MonoBehaviour
             "testing NPC dialogue",
         });
 
-        SpawnBubbles();
+        StartCoroutine(SpawnBubbles());
 
         shotGenerator.SpawnKeys();
     }
 
-    void SpawnBubbles()
+    IEnumerator SpawnBubbles()
     {
+        GameObject[] spawnedBubbles = new GameObject[bubblePrefabs.Length];
+
         for (int i = 0; i < bubblePrefabs.Length; ++i)
         {
-            Instantiate(bubblePrefabs[i]);
+            spawnedBubbles[i] = Instantiate(bubblePrefabs[i]);
+        }
+
+        float currentTime = 0.0f;
+        float duration = 2.0f;
+        float targetAlpha = 245.0f / 255.0f; //end result not fully solid
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+
+            float progress = currentTime / duration; //calculate percentage of fade
+            float finalAlpha = progress * targetAlpha;
+
+            foreach (GameObject bubble in spawnedBubbles)
+            {
+                if (bubble != null)
+                {
+                    SpriteRenderer sr = bubble.GetComponent<SpriteRenderer>();
+                    if (sr != null)
+                    {
+                        Color color = sr.color;
+                        color.a = finalAlpha;
+                        sr.color = color;
+                    }
+                }
+            }
+            yield return null;
         }
     }
 

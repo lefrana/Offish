@@ -20,18 +20,18 @@ public class Dialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            if (textComponent.text == lines[index])
-            {
-                NextLine();
-            }
-            else
-            {
-                StopAllCoroutines();
-                textComponent.text = lines[index];
-            }
-        }
+        //if(Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    if (textComponent.text == lines[index])
+        //    {
+        //        NextLine();
+        //    }
+        //    else
+        //    {
+        //        StopAllCoroutines();
+        //        textComponent.text = lines[index];
+        //    }
+        //}
     }
     public void SetDialogue(string[] newLines)
     {
@@ -46,7 +46,7 @@ public class Dialogue : MonoBehaviour
 
     IEnumerator TypeLine()
     {
-        charaAnim.SetBool("isTalking", true); //start talking animation
+        charaAnim.SetBool("isTalking", true); //start fish talking animation
 
         foreach (char c in lines[index].ToCharArray())
         {
@@ -55,6 +55,10 @@ public class Dialogue : MonoBehaviour
         }
 
         charaAnim.SetBool("isTalking", false);
+
+        //dialogue advances automatically
+        yield return new WaitForSeconds(2.0f);
+        NextLine();
     }
 
     void NextLine()
