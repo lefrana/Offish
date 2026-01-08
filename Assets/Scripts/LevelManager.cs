@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 using System.Collections;
+using NUnit.Framework;
 
 public class LevelManager : MonoBehaviour
 {
@@ -33,18 +35,27 @@ public class LevelManager : MonoBehaviour
             "testing NPC dialogue",
         });
 
-        StartCoroutine(SpawnBubbles());
+        StartCoroutine(SpawnObjects());
 
-        shotGenerator.SpawnKeys();
+        //shotGenerator.SpawnKeys();
     }
 
-    IEnumerator SpawnBubbles()
+    IEnumerator SpawnObjects()
     {
-        GameObject[] spawnedBubbles = new GameObject[bubblePrefabs.Length];
+        List<GameObject> allObjects = new List<GameObject>();
+
+        //GameObject[] spawnedBubbles = new GameObject[bubblePrefabs.Length];
 
         for (int i = 0; i < bubblePrefabs.Length; ++i)
         {
-            spawnedBubbles[i] = Instantiate(bubblePrefabs[i]);
+            GameObject bubble = Instantiate(bubblePrefabs[i]);
+            allObjects.Add(bubble);
+        }
+
+        GameObject[] keys = shotGenerator.SpawnKeys();
+        if (keys != null)
+        {
+            allObjects.AddRange(keys);
         }
 
         float currentTime = 0.0f;
@@ -58,11 +69,11 @@ public class LevelManager : MonoBehaviour
             float progress = currentTime / duration; //calculate percentage of fade
             float finalAlpha = progress * targetAlpha;
 
-            foreach (GameObject bubble in spawnedBubbles)
+            foreach (GameObject obj in allObjects)
             {
-                if (bubble != null)
+                if (obj != null)
                 {
-                    SpriteRenderer sr = bubble.GetComponent<SpriteRenderer>();
+                    SpriteRenderer sr = obj.GetComponent<SpriteRenderer>();
                     if (sr != null)
                     {
                         Color color = sr.color;

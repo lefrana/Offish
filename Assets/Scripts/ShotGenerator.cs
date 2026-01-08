@@ -8,7 +8,7 @@ public class ShotGenerator : MonoBehaviour
 
     private ArrowKey[] arrowKey;
     private int keyCount = 0; //
-    private bool shotSpawned = false;
+    public bool shotSpawned = false;
 
     void Start()
     {
@@ -46,9 +46,11 @@ public class ShotGenerator : MonoBehaviour
         }
     }
 
-    public void SpawnKeys()
+    public GameObject[] SpawnKeys()
     {
         arrowKey = new ArrowKey[keyMax];
+
+        GameObject[] key = new GameObject[keyMax];
 
         Vector2 basePos = new Vector2(3.0f, 4.3f);
         float spacing = 1.0f;
@@ -61,10 +63,14 @@ public class ShotGenerator : MonoBehaviour
             Vector2 pos = basePos + new Vector2(i * spacing, 0.0f);
             GameObject obj = Instantiate(prefab, pos, Quaternion.identity);
 
+            key[i] = obj;
+
             ArrowKey arrow = obj.GetComponent<ArrowKey>();
             arrow.type = type;
             arrowKey[i] = arrow;
         }
+
+        return key;
     }
 
     GameObject GetPrefab(ArrowType type)
@@ -91,7 +97,31 @@ public class ShotGenerator : MonoBehaviour
     void SpawnShot()
     {
         Vector2 shotPos = new Vector2(4.0f, 4.3f);
-        Instantiate(shotPrefab, shotPos, Quaternion.identity);
+        GameObject newShot = Instantiate(shotPrefab, shotPos, Quaternion.identity);
+
+        // Give the shot a reference to this script so it can call OnShotFinished()
+        ShotController controller = newShot.GetComponent<ShotController>();
+        if (controller != null)
+        {
+            controller.shotGenerator = this;
+            controller.isShot = true;
+        }
+
+        for (int i = 0; i < arrowKey.Length; i++)
+        {
+            if (arrowKey[i] != null)
+            {
+                Destroy(arrowKey[i].gameObject);
+            }
+        }
+
+        shotSpawned = true;
+    }
+
+    public void OnShotFinished()
+    {
+        shotSpawned = false;
+        ResetKeys(); //spawn new keys and shot
     }
 
     void ResetKeys()

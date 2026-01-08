@@ -382,6 +382,7 @@ MonoBehaviour:
   keyRightPrefab: {fileID: 3138685993169377289, guid: 6198ed5b654dff242a17ab5c4ba9c901, type: 3}
   shotPrefab: {fileID: 3396252577044670111, guid: 3d6c56a8c88b29a468ca0a3153fb28b2, type: 3}
   keyMax: 4
+  shotSpawned: 0
 --- !u!4 &507814070
 Transform:
   m_ObjectHideFlags: 0
@@ -596,7 +597,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: -8922328891513336043, guid: f752c5622e4a93c48929dc50d7ce368b, type: 3}
-  m_Color: {r: 0.64924806, g: 0.6031015, b: 0.800539, a: 1}
+  m_Color: {r: 0.8274932, g: 0.8274932, b: 0.8274932, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

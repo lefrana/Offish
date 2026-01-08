@@ -34,9 +34,17 @@ public class BubbleController : MonoBehaviour
             if(isOnTop())
             {
                 ShowText();
+
+                GameObject shot = GameObject.FindGameObjectWithTag("Shot");
+                if (shot != null)
+                {
+                    Destroy(shot);
+                }
+
                 Destroy(gameObject);
             }
         }
+
     }
 
     void ShowText()
