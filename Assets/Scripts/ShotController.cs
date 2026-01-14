@@ -26,6 +26,11 @@ public class ShotController : MonoBehaviour
 
         Vector3 move = new Vector3(h, v, 0.0f);
         transform.position += move * moveSpeed * Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnDestroy()

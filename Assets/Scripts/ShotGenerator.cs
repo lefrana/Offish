@@ -48,8 +48,9 @@ public class ShotGenerator : MonoBehaviour
 
     public GameObject[] SpawnKeys()
     {
-        arrowKey = new ArrowKey[keyMax];
+        keyCount = 0;
 
+        arrowKey = new ArrowKey[keyMax];
         GameObject[] key = new GameObject[keyMax];
 
         Vector2 basePos = new Vector2(3.0f, 4.3f);
@@ -99,20 +100,11 @@ public class ShotGenerator : MonoBehaviour
         Vector2 shotPos = new Vector2(4.0f, 4.3f);
         GameObject newShot = Instantiate(shotPrefab, shotPos, Quaternion.identity);
 
-        // Give the shot a reference to this script so it can call OnShotFinished()
         ShotController controller = newShot.GetComponent<ShotController>();
         if (controller != null)
         {
             controller.shotGenerator = this;
             controller.isShot = true;
-        }
-
-        for (int i = 0; i < arrowKey.Length; i++)
-        {
-            if (arrowKey[i] != null)
-            {
-                Destroy(arrowKey[i].gameObject);
-            }
         }
 
         shotSpawned = true;
@@ -121,6 +113,7 @@ public class ShotGenerator : MonoBehaviour
     public void OnShotFinished()
     {
         shotSpawned = false;
+        keyCount = 0;
         ResetKeys(); //spawn new keys and shot
     }
 
@@ -134,7 +127,23 @@ public class ShotGenerator : MonoBehaviour
                 Destroy(arrowKey[i].gameObject);
             }
         }
+        shotSpawned = false;
+
         keyCount = 0;
         SpawnKeys();
+    }
+
+    public void ResetShotGenerator()
+    {
+        // 1. Stop any shots currently being fired
+        shotSpawned = true; // Locking it prevents new inputs
+
+        // 2. Find and destroy any shots/arrows currently in the air
+        // Replace "Shot" and "Arrows" with whatever your Tags actually are
+        GameObject[] oldShots = GameObject.FindGameObjectsWithTag("Shot");
+        foreach (GameObject s in oldShots) Destroy(s);
+
+        GameObject[] oldKeys = GameObject.FindGameObjectsWithTag("Arrows");
+        foreach (GameObject k in oldKeys) Destroy(k);
     }
 }

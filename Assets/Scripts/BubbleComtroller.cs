@@ -31,9 +31,11 @@ public class BubbleController : MonoBehaviour
         //x button (keyboard)
         if (shotInside && Input.GetKeyDown(KeyCode.X))
         {
+            //to prevent overlapping bubbles to be shot together
             if(isOnTop())
             {
-                ShowText();
+                Freeze();
+                ShowText(); //dialogue based on bubble shot
 
                 GameObject shot = GameObject.FindGameObjectWithTag("Shot");
                 if (shot != null)
@@ -41,7 +43,7 @@ public class BubbleController : MonoBehaviour
                     Destroy(shot);
                 }
 
-                Destroy(gameObject);
+                //Destroy(gameObject);
             }
         }
 
@@ -49,15 +51,11 @@ public class BubbleController : MonoBehaviour
 
     void ShowText()
     {
-        LevelManager manager = Object.FindFirstObjectByType<LevelManager>();
+        LevelManager1 manager = Object.FindFirstObjectByType<LevelManager1>();
 
         if (manager != null)
         {
-            manager.CheckAnswer(type);
-        }
-        else
-        {
-            Debug.LogError("LevelManager not found");
+            manager.CheckAnswer(type, gameObject);
         }
     }
 
@@ -87,6 +85,18 @@ public class BubbleController : MonoBehaviour
         //true if on the highest layer
         return true;
     }
+
+    // Add these to your BubbleController class
+
+    public void Freeze()
+    {
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.simulated = false; // Optional: prevents it from being pushed by others while frozen
+        }
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
