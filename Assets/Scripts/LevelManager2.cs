@@ -14,7 +14,14 @@ public class LevelManager2 : MonoBehaviour
 
     void OnEnable()
     {
-        StartingDialogue();
+        // Clear lists immediately
+        activeBubbles.Clear();
+        activeKeys.Clear();
+
+        npcDialogue.HideNPC();
+
+        // Delay the dialogue slightly so the UI can reset from Level 1
+        Invoke("StartingDialogue", 0.1f);
         Invoke("StartLevel", 1.0f);
     }
 

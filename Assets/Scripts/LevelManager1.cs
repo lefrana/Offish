@@ -14,12 +14,22 @@ public class LevelManager1 : MonoBehaviour
 
     void OnEnable()
     {
+        dialogue.SetDialogue(new string[] { "" });
+        npcDialogue.HideNPC();
+        //npcDialogue.SetDialogue(new string[] { "" });
+
         StartingDialogue();
         Invoke("StartLevel", 1.0f);
     }
 
     void StartingDialogue()
     {
+
+        npcDialogue.SetDialogue(new string[]
+        {
+            "testing NPC dialogue",
+        });
+
         dialogue.SetDialogue(new string[]
         {
             "testing level start",
@@ -30,12 +40,6 @@ public class LevelManager1 : MonoBehaviour
 
     void StartLevel()
     {
-
-        npcDialogue.SetDialogue(new string[]
-        {
-            "testing NPC dialogue",
-        });
-
         foreach (GameObject prefab in bubblePrefabs)
         {
             GameObject b = Instantiate(prefab);

@@ -4,36 +4,39 @@ using System.Collections;
 
 public class NPCDialogue : MonoBehaviour
 {
-    public TextMeshProUGUI textComponent;
-    private string[] lines;
-    public float textSpeed;
+    public GameObject npc;         // The Portrait
+    public GameObject visualBox;   // The Text Bubble/Background Image
 
+    public TextMeshProUGUI textComponent;
+    public float textSpeed = 0.05f;
+
+    private string[] lines;
     private int index;
+    private bool isTyping = false; // Add this to track state
 
     void Start()
     {
-        textComponent.text = string.Empty;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
+        // Only hide if we aren't currently typing a message
+        if (!isTyping)
         {
-            if (textComponent.text == lines[index])
-            {
-                NextLine();
-            }
-            else
-            {
-                StopAllCoroutines();
-                textComponent.text = lines[index];
-            }
+            HideNPC();
         }
     }
+
     public void SetDialogue(string[] newLines)
     {
-        gameObject.SetActive(true);
+        StopAllCoroutines();
+
+        if (newLines == null || newLines.Length == 0 || string.IsNullOrEmpty(newLines[0]))
+        {
+            HideNPC();
+            return;
+        }
+
+        isTyping = true; // We are now active
+
+        if (npc != null) npc.SetActive(true);
+        if (visualBox != null) visualBox.SetActive(true);
 
         lines = newLines;
         textComponent.text = string.Empty;
@@ -44,11 +47,15 @@ public class NPCDialogue : MonoBehaviour
 
     IEnumerator TypeLine()
     {
+        textComponent.text = string.Empty;
         foreach (char c in lines[index].ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
+
+        yield return new WaitForSeconds(2.0f);
+        NextLine();
     }
 
     void NextLine()
@@ -56,12 +63,19 @@ public class NPCDialogue : MonoBehaviour
         if (index < lines.Length - 1)
         {
             index++;
-            textComponent.text = string.Empty;
             StartCoroutine(TypeLine());
         }
         else
         {
-            gameObject.SetActive(false);
+            HideNPC();
         }
+    }
+
+    public void HideNPC()
+    {
+        isTyping = false;
+        if (npc != null) npc.SetActive(false);
+        if (visualBox != null) visualBox.SetActive(false);
+        textComponent.text = string.Empty;
     }
 }

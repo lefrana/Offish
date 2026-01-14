@@ -20,18 +20,7 @@ public class Dialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if(Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    if (textComponent.text == lines[index])
-        //    {
-        //        NextLine();
-        //    }
-        //    else
-        //    {
-        //        StopAllCoroutines();
-        //        textComponent.text = lines[index];
-        //    }
-        //}
+
     }
     public void SetDialogue(string[] newLines)
     {

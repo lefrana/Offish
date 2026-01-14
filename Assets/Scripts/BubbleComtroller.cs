@@ -51,11 +51,19 @@ public class BubbleController : MonoBehaviour
 
     void ShowText()
     {
-        LevelManager1 manager = Object.FindFirstObjectByType<LevelManager1>();
-
-        if (manager != null)
+        // Try to find Level 1
+        LevelManager1 manager1 = Object.FindFirstObjectByType<LevelManager1>();
+        if (manager1 != null)
         {
-            manager.CheckAnswer(type, gameObject);
+            manager1.CheckAnswer(type, gameObject);
+            return; // Stop here if found
+        }
+
+        LevelManager2 manager2 = Object.FindFirstObjectByType<LevelManager2>();
+        if (manager2 != null)
+        {
+            manager2.CheckAnswer(type, gameObject);
+            return;
         }
     }
 
