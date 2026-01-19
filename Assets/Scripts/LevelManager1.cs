@@ -12,6 +12,8 @@ public class LevelManager1 : MonoBehaviour
     private List<GameObject> activeBubbles = new List<GameObject>();
     private List<GameObject> activeKeys = new List<GameObject>();
 
+    public CanvasGroup levelFade; //for level transition
+
     void OnEnable()
     {
         activeBubbles.Clear();
@@ -20,19 +22,32 @@ public class LevelManager1 : MonoBehaviour
         dialogue.SetDialogue(new string[] { "" });
         npcDialogue.HideNPC();
 
-        // Instead of Invoke, let the dialogue sequence trigger the level start
+        //start starting dialogue sequence
         StartCoroutine(StartingSequence());
     }
 
     IEnumerator StartingSequence()
     {
-        // Ensure NPC is hidden at the absolute start
+        //hide npc at start
         npcDialogue.HideNPC();
 
-        // Wait for the full conversation to finish
+        if (levelFade != null)
+        {
+            float elapsed = 0f;
+            float duration = 2.0f;
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                levelFade.alpha = 1f - (elapsed / duration);
+                yield return null;
+            }
+            levelFade.alpha = 0f; // Ensure it is fully clear
+        }
+
+        //start dialogue sequence
         yield return StartCoroutine(DialogueSequence());
 
-        // Give a tiny breather before bubbles appear
+        //pause before starting level
         yield return new WaitForSeconds(0.5f);
 
         StartLevel();
@@ -40,31 +55,38 @@ public class LevelManager1 : MonoBehaviour
 
     IEnumerator DialogueSequence()
     {
-        // 1. Start Fish Dialogue
+        //start fish dialogue
         dialogue.SetDialogue(new string[]
         {
-        "testing level start",
-        "testing second dialogue line",
-        "テストにさんハッピーはっぴあああああああああああああああ?!"
+            "本日はどうぞよろしくお願いいたします！",
         });
 
-        // Wait for Fish to finish
+        //wait until main dialogue finishes
         while (dialogue.gameObject.activeSelf)
         {
             yield return null;
         }
 
-        // 2. Small pause between speakers
         yield return new WaitForSeconds(0.6f);
 
-        // 3. Start NPC Dialogue
+        //start npc dialogue after a pause
         npcDialogue.SetDialogue(new string[]
         {
-        "testing NPC dialogue",
+            "じゃあ。。",
+            "自己紹介、お願いできますか？",
         });
 
-        // Wait for NPC to finish
         while (npcDialogue.gameObject.activeSelf)
+        {
+            yield return null;
+        }
+
+        dialogue.SetDialogue(new string[]
+        {
+            "<i>（ちゃんと自己紹介しないとな。。）</i>",
+        });
+
+        while (dialogue.gameObject.activeSelf)
         {
             yield return null;
         }
@@ -79,8 +101,6 @@ public class LevelManager1 : MonoBehaviour
         }
 
         StartCoroutine(SpawnObjects());
-
-        //shotGenerator.SpawnKeys();
     }
 
     IEnumerator SpawnObjects()
@@ -133,6 +153,7 @@ public class LevelManager1 : MonoBehaviour
 
         shotGenerator.shotSpawned = false;
 
+        //start timer
         if (Timer.instance != null)
         {
             Timer.instance.StartTimer();
@@ -145,29 +166,29 @@ public class LevelManager1 : MonoBehaviour
         {
             case BubbleType.Correct:
                 StartCoroutine(AnswerSequence(
-                    new string[] { "Correct!" },
-                    new string[] { "Great job, let's move on!" },
+                    new string[] { "アジ・ヒカルです。営業をしています。" },
+                    new string[] { "なるほど。" },
                     true, chosenBubble));
                 break;
 
             case BubbleType.False1:
                 StartCoroutine(AnswerSequence(
-                    new string[] { "False 1..." },
-                    new string[] { "That wasn't the right choice." },
+                    new string[] { "アジ・ヒカルです。既婚です。" },
+                    new string[] { "そういうつもりで聞いたわけじゃないです。" },
                     false, chosenBubble));
                 break;
 
             case BubbleType.False2:
                 StartCoroutine(AnswerSequence(
-                    new string[] { "False 2..." },
-                    new string[] { "Maybe try a different bubble?" },
+                    new string[] { "ただのアジです。" },
+                    new string[] { "それは分かります。。" },
                     false, chosenBubble));
                 break;
 
             default:
                 StartCoroutine(AnswerSequence(
-                    new string[] { "Not quite." },
-                    new string[] { "Don't give up!" },
+                    new string[] { "。。言いにくいです。" },
+                    new string[] { "え。。？" },
                     false, chosenBubble));
                 break;
         }
@@ -179,33 +200,46 @@ public class LevelManager1 : MonoBehaviour
 
         if (Timer.instance != null)
         {
-            Timer.instance.StopTimer(); // We will add this function to Timer.cs
+            Timer.instance.StopTimer(); //pause timer
         }
 
-        if (!isCorrect)
+        //hide other bubbles and arrows
+        foreach (GameObject b in activeBubbles)
         {
-            // 1. Hide bubbles and destroy arrows immediately
-            foreach (GameObject b in activeBubbles)
+            if (b != null && b != chosenBubble)
             {
-                if (b != null && b != chosenBubble) SetAlpha(b, 0f);
+                SetAlpha(b, 0f);
             }
-
-            // Clean up the current arrows so they disappear
-            GameObject[] keys = GameObject.FindGameObjectsWithTag("Arrows");
-            foreach (GameObject k in keys) { if (k != null) Destroy(k); }
-            activeKeys.Clear();
         }
 
-        // 2. Dialogues play...
+        //destroy keys to reset
+        GameObject[] keys = GameObject.FindGameObjectsWithTag("Arrows");
+        foreach (GameObject k in keys)
+        {
+            if (k != null)
+            {
+                Destroy(k);
+            }
+        }
+        activeKeys.Clear();
+
+        //answer dialogue starts
         dialogue.SetDialogue(mainLines);
-        while (dialogue.gameObject.activeSelf) yield return null;
+        while (dialogue.gameObject.activeSelf)
+        {
+            yield return null;
+        }
 
         npcDialogue.SetDialogue(npcLines);
-        while (npcDialogue.gameObject.activeSelf) yield return null;
+        while (npcDialogue.gameObject.activeSelf)
+        {
+            yield return null;
+        }
 
-        // 3. DIALOGUE IS DONE - PREPARE FOR NEXT ROUND
-        shotGenerator.isWaitingForDialogue = false; // Allow keys to spawn again
+        //prepare for next round when dialogue is done
+        shotGenerator.isWaitingForDialogue = false; //reset keys
 
+        //check answer
         if (isCorrect)
         {
             NextLevel();
@@ -221,8 +255,6 @@ public class LevelManager1 : MonoBehaviour
             StartCoroutine(SpawnObjects());
         }
     }
-
-
     void SetAlpha(GameObject obj, float alpha)
     {
         if (obj == null) return;
@@ -243,24 +275,33 @@ public class LevelManager1 : MonoBehaviour
             text.color = tc;
         }
     }
-
-    void NextLevel()
+    IEnumerator FadeToNextLevel()
     {
-        // 1. Tell ShotGenerator to clear the air
-        if (shotGenerator != null)
+        // --- WHITE FADE OUT (Clear to White) ---
+        if (levelFade!= null)
         {
-            shotGenerator.ResetShotGenerator();
+            float elapsed = 0f;
+            float duration = 1.0f;
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                levelFade.alpha = elapsed / duration;
+                yield return null;
+            }
+            levelFade.alpha = 1f; // Screen is now fully white
         }
 
-        // 2. Clear bubbles and anything else
+        // Standard cleanup
+        if (shotGenerator != null) shotGenerator.ResetShotGenerator();
         foreach (GameObject b in activeBubbles) { if (b != null) Destroy(b); }
         activeBubbles.Clear();
 
-        // 3. Move to next level
+        // Move to next level
         GameManager gm = GetComponentInParent<GameManager>();
-        if (gm != null)
-        {
-            gm.MoveToNextLevel();
-        }
+        if (gm != null) gm.MoveToNextLevel();
+    }
+    void NextLevel()
+    {
+        StartCoroutine(FadeToNextLevel());
     }
 }
