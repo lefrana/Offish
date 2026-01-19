@@ -29,21 +29,44 @@ public class BubbleController : MonoBehaviour
     void Update()
     {
         //x button (keyboard)
+        //if (shotInside && Input.GetKeyDown(KeyCode.X))
+        //{
+        //    //to prevent overlapping bubbles to be shot together
+        //    if(isOnTop())
+        //    {
+        //        Freeze();
+        //        ShowText(); //dialogue based on bubble shot
+
+        //        GameObject shot = GameObject.FindGameObjectWithTag("Shot");
+        //        if (shot != null)
+        //        {
+        //            Destroy(shot);
+        //        }
+
+        //        //Destroy(gameObject);
+        //    }
+        //}
+
         if (shotInside && Input.GetKeyDown(KeyCode.X))
         {
-            //to prevent overlapping bubbles to be shot together
-            if(isOnTop())
+            if (isOnTop())
             {
                 Freeze();
-                ShowText(); //dialogue based on bubble shot
+
+                // Tell the generator to STOP the automatic arrow reset
+                ShotGenerator sg = Object.FindFirstObjectByType<ShotGenerator>();
+                if (sg != null)
+                {
+                    sg.isWaitingForDialogue = true;
+                }
+
+                ShowText();
 
                 GameObject shot = GameObject.FindGameObjectWithTag("Shot");
                 if (shot != null)
                 {
                     Destroy(shot);
                 }
-
-                //Destroy(gameObject);
             }
         }
 

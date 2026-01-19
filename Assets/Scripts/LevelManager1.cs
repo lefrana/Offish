@@ -14,28 +14,60 @@ public class LevelManager1 : MonoBehaviour
 
     void OnEnable()
     {
+        activeBubbles.Clear();
+        activeKeys.Clear();
+
         dialogue.SetDialogue(new string[] { "" });
         npcDialogue.HideNPC();
-        //npcDialogue.SetDialogue(new string[] { "" });
 
-        StartingDialogue();
-        Invoke("StartLevel", 1.0f);
+        // Instead of Invoke, let the dialogue sequence trigger the level start
+        StartCoroutine(StartingSequence());
     }
 
-    void StartingDialogue()
+    IEnumerator StartingSequence()
     {
+        // Ensure NPC is hidden at the absolute start
+        npcDialogue.HideNPC();
 
-        npcDialogue.SetDialogue(new string[]
-        {
-            "testing NPC dialogue",
-        });
+        // Wait for the full conversation to finish
+        yield return StartCoroutine(DialogueSequence());
 
+        // Give a tiny breather before bubbles appear
+        yield return new WaitForSeconds(0.5f);
+
+        StartLevel();
+    }
+
+    IEnumerator DialogueSequence()
+    {
+        // 1. Start Fish Dialogue
         dialogue.SetDialogue(new string[]
         {
-            "testing level start",
-            "testing second dialogue line",
-            "テストにさんハッピーはっぴあああああああああああああああ?!",
+        "testing level start",
+        "testing second dialogue line",
+        "テストにさんハッピーはっぴあああああああああああああああ?!"
         });
+
+        // Wait for Fish to finish
+        while (dialogue.gameObject.activeSelf)
+        {
+            yield return null;
+        }
+
+        // 2. Small pause between speakers
+        yield return new WaitForSeconds(0.6f);
+
+        // 3. Start NPC Dialogue
+        npcDialogue.SetDialogue(new string[]
+        {
+        "testing NPC dialogue",
+        });
+
+        // Wait for NPC to finish
+        while (npcDialogue.gameObject.activeSelf)
+        {
+            yield return null;
+        }
     }
 
     void StartLevel()
@@ -100,7 +132,11 @@ public class LevelManager1 : MonoBehaviour
         }
 
         shotGenerator.shotSpawned = false;
-        //Debug.Log("Respawn Complete - Game Unlocked");
+
+        if (Timer.instance != null)
+        {
+            Timer.instance.StartTimer();
+        }
     }
 
     public void CheckAnswer(BubbleType type, GameObject chosenBubble)
@@ -108,67 +144,85 @@ public class LevelManager1 : MonoBehaviour
         switch (type)
         {
             case BubbleType.Correct:
-                dialogue.SetDialogue(new string[] { "Correct" });
-                Invoke("NextLevel", 2.0f);
-                //load next level after 2 seconds
-                //Invoke("LoadNextLevel", 2.0f);
+                StartCoroutine(AnswerSequence(
+                    new string[] { "Correct!" },
+                    new string[] { "Great job, let's move on!" },
+                    true, chosenBubble));
                 break;
 
             case BubbleType.False1:
-                dialogue.SetDialogue(new string[] { "False1" });
-
-                StartCoroutine(WrongAnswerReset(chosenBubble));
+                StartCoroutine(AnswerSequence(
+                    new string[] { "False 1..." },
+                    new string[] { "That wasn't the right choice." },
+                    false, chosenBubble));
                 break;
 
             case BubbleType.False2:
-                dialogue.SetDialogue(new string[] { "False2" });
-
-                StartCoroutine(WrongAnswerReset(chosenBubble));
+                StartCoroutine(AnswerSequence(
+                    new string[] { "False 2..." },
+                    new string[] { "Maybe try a different bubble?" },
+                    false, chosenBubble));
                 break;
 
             default:
-                dialogue.SetDialogue(new string[] { "False3" });
-
-                StartCoroutine(WrongAnswerReset(chosenBubble));
+                StartCoroutine(AnswerSequence(
+                    new string[] { "Not quite." },
+                    new string[] { "Don't give up!" },
+                    false, chosenBubble));
                 break;
         }
     }
 
-    IEnumerator WrongAnswerReset(GameObject chosenBubble)
+    IEnumerator AnswerSequence(string[] mainLines, string[] npcLines, bool isCorrect, GameObject chosenBubble)
     {
-
         shotGenerator.shotSpawned = true;
 
-        yield return new WaitForSeconds(0.1f);
-
-        foreach (GameObject b in activeBubbles)
+        if (Timer.instance != null)
         {
-            // If it's NOT the bubble we just shot, make it invisible
-            if (b != null && b != chosenBubble)
+            Timer.instance.StopTimer(); // We will add this function to Timer.cs
+        }
+
+        if (!isCorrect)
+        {
+            // 1. Hide bubbles and destroy arrows immediately
+            foreach (GameObject b in activeBubbles)
             {
-                SetAlpha(b, 0f);
+                if (b != null && b != chosenBubble) SetAlpha(b, 0f);
             }
+
+            // Clean up the current arrows so they disappear
+            GameObject[] keys = GameObject.FindGameObjectsWithTag("Arrows");
+            foreach (GameObject k in keys) { if (k != null) Destroy(k); }
+            activeKeys.Clear();
         }
 
-        GameObject[] keys = GameObject.FindGameObjectsWithTag("Arrows");
-        foreach (GameObject k in keys)
+        // 2. Dialogues play...
+        dialogue.SetDialogue(mainLines);
+        while (dialogue.gameObject.activeSelf) yield return null;
+
+        npcDialogue.SetDialogue(npcLines);
+        while (npcDialogue.gameObject.activeSelf) yield return null;
+
+        // 3. DIALOGUE IS DONE - PREPARE FOR NEXT ROUND
+        shotGenerator.isWaitingForDialogue = false; // Allow keys to spawn again
+
+        if (isCorrect)
         {
-            Destroy(k);
+            NextLevel();
         }
-
-        //freeze the bubble for a bit before destroying it
-        yield return new WaitForSeconds(2.0f);
-
-        if (chosenBubble != null)
+        else
         {
-            activeBubbles.Remove(chosenBubble);
-
-            // Physically delete it from the scene
-            Destroy(chosenBubble);
+            if (chosenBubble != null)
+            {
+                activeBubbles.Remove(chosenBubble);
+                Destroy(chosenBubble);
+            }
+            yield return new WaitForSeconds(0.5f);
+            StartCoroutine(SpawnObjects());
         }
-
-        StartCoroutine(SpawnObjects());
     }
+
+
     void SetAlpha(GameObject obj, float alpha)
     {
         if (obj == null) return;

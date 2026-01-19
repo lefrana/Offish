@@ -24,18 +24,22 @@ public class Dialogue : MonoBehaviour
     }
     public void SetDialogue(string[] newLines)
     {
+        // 1. CRITICAL FIX: Kill any typing or waiting currently happening
+        StopAllCoroutines();
+
         gameObject.SetActive(true);
 
         lines = newLines;
         textComponent.text = string.Empty;
         index = 0;
-        
+
         StartCoroutine(TypeLine());
     }
 
     IEnumerator TypeLine()
     {
-        charaAnim.SetBool("isTalking", true); //start fish talking animation
+        textComponent.text = string.Empty; // Clear text again just to be safe
+        charaAnim.SetBool("isTalking", true);
 
         foreach (char c in lines[index].ToCharArray())
         {
@@ -45,7 +49,9 @@ public class Dialogue : MonoBehaviour
 
         charaAnim.SetBool("isTalking", false);
 
-        //dialogue advances automatically
+        // 2. The Auto-Advance Timer
+        // If SetDialogue is called again during these 2 seconds, 
+        // StopAllCoroutines() above will prevent NextLine() from being called twice.
         yield return new WaitForSeconds(2.0f);
         NextLine();
     }

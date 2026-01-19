@@ -10,6 +10,9 @@ public class ShotGenerator : MonoBehaviour
     private int keyCount = 0; //
     public bool shotSpawned = false;
 
+    public bool isWaitingForDialogue = false;
+
+
     void Start()
     {
         //SpawnKeys();
@@ -49,9 +52,8 @@ public class ShotGenerator : MonoBehaviour
     public GameObject[] SpawnKeys()
     {
         keyCount = 0;
-
         arrowKey = new ArrowKey[keyMax];
-        GameObject[] key = new GameObject[keyMax];
+        GameObject[] keyObjects = new GameObject[keyMax];
 
         Vector2 basePos = new Vector2(3.0f, 4.3f);
         float spacing = 1.0f;
@@ -64,14 +66,17 @@ public class ShotGenerator : MonoBehaviour
             Vector2 pos = basePos + new Vector2(i * spacing, 0.0f);
             GameObject obj = Instantiate(prefab, pos, Quaternion.identity);
 
-            key[i] = obj;
+            // IMPORTANT: Force the tag here so LevelManager can always find it
+            obj.tag = "Arrows";
+
+            keyObjects[i] = obj;
 
             ArrowKey arrow = obj.GetComponent<ArrowKey>();
             arrow.type = type;
             arrowKey[i] = arrow;
         }
 
-        return key;
+        return keyObjects;
     }
 
     GameObject GetPrefab(ArrowType type)
@@ -109,26 +114,35 @@ public class ShotGenerator : MonoBehaviour
 
         shotSpawned = true;
     }
-
     public void OnShotFinished()
     {
+        // If we hit a bubble, DO NOT reset keys yet. 
+        // The LevelManager will handle the reset after the NPC finishes.
+        if (isWaitingForDialogue)
+        {
+            return;
+        }
+
         shotSpawned = false;
         keyCount = 0;
-        ResetKeys(); //spawn new keys and shot
+        ResetKeys();
     }
 
     void ResetKeys()
     {
-        //destroy existing arrowKey and generate new ones
-        for (int i = 0; i < arrowKey.Length; i++)
+        if (arrowKey != null)
         {
-            if (arrowKey[i] != null)
+            for (int i = 0; i < arrowKey.Length; i++)
             {
-                Destroy(arrowKey[i].gameObject);
+                // Check if it exists before destroying
+                if (arrowKey[i] != null && arrowKey[i].gameObject != null)
+                {
+                    Destroy(arrowKey[i].gameObject);
+                }
             }
         }
-        shotSpawned = false;
 
+        shotSpawned = false;
         keyCount = 0;
         SpawnKeys();
     }

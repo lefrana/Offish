@@ -2,16 +2,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Drag the CHILD GameObjects (Level1, Level2) into this list
     public GameObject[] levels;
     private int currentLevelIndex = 0;
 
     void Awake()
     {
-        // Force every level child to be OFF at the very start
+        //all level is off at the start
         foreach (GameObject lvl in levels)
         {
-            if (lvl != null) lvl.SetActive(false);
+            if (lvl != null)
+            {
+                lvl.SetActive(false);
+            }
         }
     }
 
