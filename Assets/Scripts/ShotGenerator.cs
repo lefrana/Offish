@@ -12,6 +12,8 @@ public class ShotGenerator : MonoBehaviour
 
     public bool isWaitingForDialogue = false;
 
+    public AudioSource audioSource;
+
 
     void Start()
     {
@@ -36,6 +38,11 @@ public class ShotGenerator : MonoBehaviour
         if (input == null)
         {
             return;
+        }
+
+        if (audioSource != null)
+        {
+            audioSource.Play();
         }
 
         if (arrowKey[keyCount].Check(input.Value))

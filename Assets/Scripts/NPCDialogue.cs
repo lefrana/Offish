@@ -12,15 +12,19 @@ public class NPCDialogue : MonoBehaviour
 
     private string[] lines;
     private int index;
-    private bool isTyping = false; // Add this to track state
+    private bool isTalking = false;
+
+    public AudioSource audioSource;
 
     void Start()
     {
         // Only hide if we aren't currently typing a message
-        if (!isTyping)
+        if (!isTalking)
         {
             HideNPC();
         }
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void SetDialogue(string[] newLines)
@@ -33,7 +37,7 @@ public class NPCDialogue : MonoBehaviour
             return;
         }
 
-        isTyping = true; // We are now active
+        isTalking = true;
 
         if (npc != null) npc.SetActive(true);
         if (visualBox != null) visualBox.SetActive(true);
@@ -48,11 +52,26 @@ public class NPCDialogue : MonoBehaviour
     IEnumerator TypeLine()
     {
         textComponent.text = string.Empty;
+        isTalking = true;
+
+        // 1. Start the looping SFX
+        if (audioSource != null) audioSource.Play();
+
         foreach (char c in lines[index].ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
+
+            // Removed audioSource.Play() from here so it doesn't restart every letter
         }
+
+        // 2. Stop the SFX immediately when the text is done
+        if (audioSource != null)
+        {
+            audioSource.Stop();
+        }
+
+        isTalking = false;
 
         yield return new WaitForSeconds(2.0f);
         NextLine();
@@ -73,7 +92,7 @@ public class NPCDialogue : MonoBehaviour
 
     public void HideNPC()
     {
-        isTyping = false;
+        isTalking = false;
         if (npc != null) npc.SetActive(false);
         if (visualBox != null) visualBox.SetActive(false);
         textComponent.text = string.Empty;

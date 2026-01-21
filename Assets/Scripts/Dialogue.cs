@@ -10,6 +10,8 @@ public class Dialogue : MonoBehaviour
     public float textSpeed;
     private int index;
 
+    public AudioSource audioSource;
+
     void Start()
     {
         textComponent.text = string.Empty;
@@ -32,39 +34,34 @@ public class Dialogue : MonoBehaviour
         textComponent.text = string.Empty;
         charaAnim.SetBool("isTalking", true);
 
+        // --- START AUDIO ---
+        if (audioSource != null) audioSource.Play();
+
         string currentLine = lines[index];
         int i = 0;
 
-        // Use a while loop instead of foreach to control the index manually
         while (i < currentLine.Length)
         {
             char c = currentLine[i];
 
-            // TAG DETECTION: If we hit a '<', find the matching '>'
             if (c == '<')
             {
                 int closeTagIndex = currentLine.IndexOf('>', i);
                 if (closeTagIndex != -1)
                 {
-                    // Extract the full tag: e.g., "<i>" or "</i>"
-                    string fullTag = currentLine.Substring(i, closeTagIndex - i + 1);
-                    textComponent.text += fullTag;
-
-                    // Move the index to right after the '>'
+                    textComponent.text += currentLine.Substring(i, closeTagIndex - i + 1);
                     i = closeTagIndex + 1;
-
-                    // We don't yield return here because tags should be instant
                     continue;
                 }
             }
 
-            // Normal character typing
             textComponent.text += c;
             i++;
-
-            // Wait for the next character
             yield return new WaitForSeconds(textSpeed);
         }
+
+        // --- STOP AUDIO ---
+        if (audioSource != null) audioSource.Stop();
 
         charaAnim.SetBool("isTalking", false);
 
