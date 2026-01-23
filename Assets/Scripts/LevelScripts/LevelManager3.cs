@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
-public class LevelManager1 : MonoBehaviour
+public class LevelManager3 : MonoBehaviour
 {
     public Dialogue dialogue;
     public NPCDialogue npcDialogue;
@@ -55,25 +55,11 @@ public class LevelManager1 : MonoBehaviour
 
     IEnumerator DialogueSequence()
     {
-        //start fish dialogue
-        dialogue.SetDialogue(new string[]
-        {
-            "本日はどうぞよろしくお願いいたします！",
-        });
-
-        //wait until main dialogue finishes
-        while (dialogue.gameObject.activeSelf)
-        {
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(0.6f);
-
-        //start npc dialogue after a pause
+        //npcDialogue.gameObject.SetActive(true);
         npcDialogue.SetDialogue(new string[]
         {
-            "じゃあ。。",
-            "自己紹介、お願いできますか？",
+            "では次に、",
+            "あなたの長所と短所について教えてください。",
         });
 
         while (npcDialogue.gameObject.activeSelf)
@@ -83,7 +69,7 @@ public class LevelManager1 : MonoBehaviour
 
         dialogue.SetDialogue(new string[]
         {
-            "<i>（ちゃんと自己紹介しないとな。。）</i>",
+            "<i>（まずは長所から話そう。。）</i>",
         });
 
         while (dialogue.gameObject.activeSelf)
@@ -166,29 +152,29 @@ public class LevelManager1 : MonoBehaviour
         {
             case BubbleType.Correct:
                 StartCoroutine(AnswerSequence(
-                    new string[] { "アジ・ヒカルです。営業をしています。" },
-                    new string[] { "なるほど。" },
+                    new string[] { "長所は、コツコツ頑張れるところです。" },
+                    new string[] { "それは助かります。ぜひ来てほしいですね。" },
                     true, chosenBubble));
                 break;
 
             case BubbleType.False1:
                 StartCoroutine(AnswerSequence(
-                    new string[] { "アジ・ヒカルです。既婚です。" },
-                    new string[] { "そういうつもりで聞いたわけじゃないです。" },
+                    new string[] { "いきがいいところです。" },
+                    new string[] { "それ、魚の評価ですよね？<i>（まあ、魚ですけど。。）</i>" },
                     false, chosenBubble));
                 break;
 
             case BubbleType.False2:
                 StartCoroutine(AnswerSequence(
-                    new string[] { "ただのアジです。" },
-                    new string[] { "それは分かります。。" },
+                    new string[] { "うごきがいいです。" },
+                    new string[] { "水の中で、ですか" },
                     false, chosenBubble));
                 break;
 
             default:
                 StartCoroutine(AnswerSequence(
-                    new string[] { "。。言いにくいです。" },
-                    new string[] { "え。。？" },
+                    new string[] { "てきとう、です。。" },
+                    new string[] { "それを長所とは言いません！" },
                     false, chosenBubble));
                 break;
         }
@@ -278,7 +264,7 @@ public class LevelManager1 : MonoBehaviour
     IEnumerator FadeToNextLevel()
     {
         // --- WHITE FADE OUT (Clear to White) ---
-        if (levelFade!= null)
+        if (levelFade != null)
         {
             float elapsed = 0f;
             float duration = 1.0f;

@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
-public class LevelManager2 : MonoBehaviour
+public class LevelManager4 : MonoBehaviour
 {
     public Dialogue dialogue;
     public NPCDialogue npcDialogue;
@@ -57,7 +57,7 @@ public class LevelManager2 : MonoBehaviour
     {
         dialogue.SetDialogue(new string[]
         {
-        "<i>（仕事の経験を話せばいいんだな。。）</i>"
+            "<i>（次は短所を言えばいいんだな..）</i>",
         });
 
         while (dialogue.gameObject.activeSelf)
@@ -140,29 +140,29 @@ public class LevelManager2 : MonoBehaviour
         {
             case BubbleType.Correct:
                 StartCoroutine(AnswerSequence(
-                    new string[] { "この分野で5年ほど働いています。" },
-                    new string[] { "それは結構長いですね！" },
+                    new string[] { "ときどき、忘れっぽいところがあります。" },
+                    new string[] { "なるほど。では、それをどうやって改善していますか？" },
                     true, chosenBubble));
                 break;
 
             case BubbleType.False1:
                 StartCoroutine(AnswerSequence(
-                    new string[] { "20歳です。" },
-                    new string[] { "。。それで？" },
+                    new string[] { "短所は特にないです。" },
+                    new string[] { "そう言われると、逆に気になりますね。" },
                     false, chosenBubble));
                 break;
 
             case BubbleType.False2:
                 StartCoroutine(AnswerSequence(
-                    new string[] { "まあ、けっこう長く働いてます。" },
-                    new string[] { "長くって、どれくらいですか？" },
+                    new string[] { "少し臭いです。" },
+                    new string[] { "うちの会社では必要な要素ではないですね。" },
                     false, chosenBubble));
                 break;
 
             default:
                 StartCoroutine(AnswerSequence(
-                    new string[] { "5回くらい働きました。" },
-                    new string[] { "そんな回数でいいなら、その仕事教えてほしいです。" },
+                    new string[] { "水がないとダメです。" },
+                    new string[] { "。。じゃあ、今は大丈夫なんですか？" },
                     false, chosenBubble));
                 break;
         }
@@ -229,8 +229,6 @@ public class LevelManager2 : MonoBehaviour
             StartCoroutine(SpawnObjects());
         }
     }
-
-
     void SetAlpha(GameObject obj, float alpha)
     {
         if (obj == null) return;
