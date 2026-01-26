@@ -5,7 +5,7 @@ using System.Collections;
 public class NPCDialogue : MonoBehaviour
 {
     public GameObject npc;         // The Portrait
-    public GameObject visualBox;   // The Text Bubble/Background Image
+    public GameObject textBox;   // The Text Bubble/Background Image
 
     public TextMeshProUGUI textComponent;
     public float textSpeed = 0.05f;
@@ -39,8 +39,15 @@ public class NPCDialogue : MonoBehaviour
 
         isTalking = true;
 
-        if (npc != null) npc.SetActive(true);
-        if (visualBox != null) visualBox.SetActive(true);
+        if (npc != null)
+        {
+            npc.SetActive(true);
+        }
+
+        if (textBox != null)
+        {
+            textBox.SetActive(true);
+        }
 
         lines = newLines;
         textComponent.text = string.Empty;
@@ -94,7 +101,7 @@ public class NPCDialogue : MonoBehaviour
     {
         isTalking = false;
         if (npc != null) npc.SetActive(false);
-        if (visualBox != null) visualBox.SetActive(false);
+        if (textBox != null) textBox.SetActive(false);
         textComponent.text = string.Empty;
     }
 }

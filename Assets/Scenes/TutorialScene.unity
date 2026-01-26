@@ -464,15 +464,15 @@ GameObject:
   - component: {fileID: 952637229}
   - component: {fileID: 952637233}
   - component: {fileID: 952637232}
-  - component: {fileID: 952637231}
   - component: {fileID: 952637230}
+  - component: {fileID: 952637234}
   m_Layer: 5
   m_Name: FishDialogueBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &952637229
 RectTransform:
   m_ObjectHideFlags: 0
@@ -490,8 +490,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -580, y: -196}
-  m_SizeDelta: {x: 1160, y: 300}
+  m_AnchoredPosition: {x: -580, y: 223}
+  m_SizeDelta: {x: 1160, y: 550}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!82 &952637230
 AudioSource:
@@ -503,8 +503,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 194b3a71feefc3741852ae5be351454a, type: 3}
-  m_Resource: {fileID: 8300000, guid: 194b3a71feefc3741852ae5be351454a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 98e9224229beee340b57e7a216eb7b00, type: 3}
+  m_Resource: {fileID: 8300000, guid: 98e9224229beee340b57e7a216eb7b00, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -590,22 +590,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &952637231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 952637228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 507aca4bafa525147a0ca1026e6d5334, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  charaAnim: {fileID: 0}
-  textComponent: {fileID: 2068833195}
-  textSpeed: 0.05
-  audioSource: {fileID: 952637230}
 --- !u!114 &952637232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,7 +603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.95686275, g: 0.9254902, b: 1, a: 0.90588236}
+  m_Color: {r: 0.9838275, g: 0.8757884, b: 0.7995255, a: 0.8039216}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -644,6 +628,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952637228}
   m_CullTransparentMesh: 1
+--- !u!114 &952637234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952637228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 126dc0b1e2cf4784589b744e5e6b99be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textComponent: {fileID: 2068833195}
+  textSpeed: 0.05
+  textBox: {fileID: 952637228}
+  audioSource: {fileID: 952637230}
 --- !u!1 &1212461838
 GameObject:
   m_ObjectHideFlags: 0
@@ -847,7 +847,7 @@ GameObject:
   - component: {fileID: 2068833196}
   - component: {fileID: 2068833195}
   m_Layer: 5
-  m_Name: DialogueText(TMP)
+  m_Name: IntroText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -869,8 +869,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 580, y: -150}
-  m_SizeDelta: {x: 1060, y: 200}
+  m_AnchoredPosition: {x: 580, y: -250}
+  m_SizeDelta: {x: 1060, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2068833195
 MonoBehaviour:
@@ -1002,6 +1002,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yellowFish: {fileID: 690598916}
   fish: {fileID: 915316173}
+  tutorialText: {fileID: 952637234}
 --- !u!4 &2107028624
 Transform:
   m_ObjectHideFlags: 0
