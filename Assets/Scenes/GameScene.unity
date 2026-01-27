@@ -1630,6 +1630,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1285086312}
+  - component: {fileID: 1285086313}
   m_Layer: 0
   m_Name: Level8
   m_TagString: Untagged
@@ -1652,6 +1653,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 540350513}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1285086313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285086311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d20c17735a04d14f80edfd9a51029ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue: {fileID: 145160697}
+  npcDialogue: {fileID: 1615908627}
+  bubblePrefabs:
+  - {fileID: 2090243126228885771, guid: 0c7dccee33693f54fa19041d99d45f62, type: 3}
+  - {fileID: 2690014793721450344, guid: 798d54a5852ac2f45a9407931d160d95, type: 3}
+  - {fileID: 2464288220840673303, guid: 6799e12f23b702849b8e9d49dde4517c, type: 3}
+  - {fileID: 6547747072780341256, guid: 546203903be8f824d9236f392f3144e5, type: 3}
+  shotGenerator: {fileID: 507814069}
+  levelFade: {fileID: 1642192409}
 --- !u!1 &1294922015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1777,7 +1799,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 03:00
+  m_text: 01:00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9eb7985231c111b47b69e159334113a4, type: 2}
   m_sharedMaterial: {fileID: 7904000807915583821, guid: 9eb7985231c111b47b69e159334113a4, type: 2}
@@ -2188,7 +2210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npc: {fileID: 537619794}
-  visualBox: {fileID: 1615908623}
+  textBox: {fileID: 0}
   textComponent: {fileID: 698534441}
   textSpeed: 0.05
   audioSource: {fileID: 1615908628}

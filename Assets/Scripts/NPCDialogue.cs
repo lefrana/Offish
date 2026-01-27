@@ -31,6 +31,9 @@ public class NPCDialogue : MonoBehaviour
     {
         StopAllCoroutines();
 
+        // --- ADD THIS ---
+        gameObject.SetActive(true);
+
         if (newLines == null || newLines.Length == 0 || string.IsNullOrEmpty(newLines[0]))
         {
             HideNPC();
@@ -103,5 +106,8 @@ public class NPCDialogue : MonoBehaviour
         if (npc != null) npc.SetActive(false);
         if (textBox != null) textBox.SetActive(false);
         textComponent.text = string.Empty;
+
+        // --- ADD THIS ---
+        gameObject.SetActive(false);
     }
 }

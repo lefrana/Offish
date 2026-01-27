@@ -110,13 +110,13 @@ public class BubbleController : MonoBehaviour
             return;
         }
 
-        ////level 8
-        //LevelManager8 manager8 = Object.FindFirstObjectByType<LevelManager8>();
-        //if (manager8 != null)
-        //{
-        //    manager8.CheckAnswer(type, gameObject);
-        //    return;
-        //}
+        //level 8
+        LevelManager8 manager8 = Object.FindFirstObjectByType<LevelManager8>();
+        if (manager8 != null)
+        {
+            manager8.CheckAnswer(type, gameObject);
+            return;
+        }
     }
 
     bool isOnTop()
