@@ -19,7 +19,6 @@ public class LevelManager7 : MonoBehaviour
         activeBubbles.Clear();
         activeKeys.Clear();
 
-        dialogue.SetDialogue(new string[] { "" });
         npcDialogue.HideNPC();
 
         //start starting dialogue sequence

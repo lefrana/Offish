@@ -22,10 +22,14 @@ public class ShotGenerator : MonoBehaviour
 
     void Update()
     {
-        if (shotSpawned)
-        {
-            return;
-        }
+        // 1. If a shot is already flying, don't play sound or take input
+        if (shotSpawned) return;
+
+        // 2. IMPORTANT: If keys haven't been spawned yet (arrowKey is null), stop here!
+        if (arrowKey == null) return;
+
+        // 3. If we are waiting for NPC dialogue to finish, stop here!
+        if (isWaitingForDialogue) return;
 
         if (keyCount >= keyMax)
         {
@@ -34,12 +38,10 @@ public class ShotGenerator : MonoBehaviour
             return;
         }
 
-        ArrowType? input = GetInput(); //nullable enum, reads keyboard input
-        if (input == null)
-        {
-            return;
-        }
+        ArrowType? input = GetInput();
+        if (input == null) return;
 
+        // --- SOUND PLAYS ONLY IF WE PASS THE CHECKS ABOVE ---
         if (audioSource != null)
         {
             audioSource.Play();
@@ -51,7 +53,6 @@ public class ShotGenerator : MonoBehaviour
         }
         else
         {
-            //if wrong input, redo generating keys
             ResetKeys();
         }
     }
