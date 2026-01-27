@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -42,7 +43,22 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            SceneManager.LoadScene("EndScene");
             Debug.Log("All Levels Cleared!");
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            MoveToNextLevel();
+        }
+
+        // If you press 'E', it jumps directly to the Ending Scene
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            SceneManager.LoadScene("EndScene");
         }
     }
 }

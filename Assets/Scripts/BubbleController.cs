@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using System.Collections;
 
 public enum BubbleType { Correct, False1, False2, False3 }
 
@@ -15,6 +16,10 @@ public class BubbleController : MonoBehaviour
 
     public BubbleType type;
 
+    //bubble shot sfx
+    public AudioSource audioSource;
+    public AudioClip shotSfx;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -22,34 +27,56 @@ public class BubbleController : MonoBehaviour
         //bubbleScript = GetComponent<BubbleScript>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        //find game object with shot sfx
+        GameObject shotGenerator = GameObject.Find("ShotGenerator");
+        if (shotGenerator != null)
+        {
+            audioSource = shotGenerator.GetComponent<AudioSource>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        // We check for the key press here
         if (shotInside && Input.GetKeyDown(KeyCode.X))
         {
             if (isOnTop())
             {
-                Freeze();
-
-                // Tell the generator to STOP the automatic arrow reset
-                ShotGenerator sg = Object.FindFirstObjectByType<ShotGenerator>();
-                if (sg != null)
-                {
-                    sg.isWaitingForDialogue = true;
-                }
-
-                ShowText();
-
-                GameObject shot = GameObject.FindGameObjectWithTag("Shot");
-                if (shot != null)
-                {
-                    Destroy(shot);
-                }
+                // Start the sequence that includes a delay
+                StartCoroutine(ShotSequence());
             }
         }
+    }
 
+    // This is the sequence that handles the delay
+    IEnumerator ShotSequence()
+    {
+        // 1. Play sound immediately
+        PlayShotSound();
+        Freeze();
+
+        // 2. Stop the generator logic
+        ShotGenerator sg = Object.FindFirstObjectByType<ShotGenerator>();
+        if (sg != null) sg.isWaitingForDialogue = true;
+
+        // 3. Remove the arrow
+        GameObject shot = GameObject.FindGameObjectWithTag("Shot");
+        if (shot != null) Destroy(shot);
+
+        yield return new WaitForSeconds(0.3f);
+
+        // 5. Show the text AFTER the delay
+        ShowText();
+    }
+
+    void PlayShotSound()
+    {
+        if (audioSource != null && shotSfx != null)
+        {
+            audioSource.PlayOneShot(shotSfx);
+        }
     }
 
     void ShowText()
@@ -145,8 +172,6 @@ public class BubbleController : MonoBehaviour
         //true if on the highest layer
         return true;
     }
-
-    // Add these to your BubbleController class
 
     public void Freeze()
     {

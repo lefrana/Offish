@@ -1,10 +1,12 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement; // This allows us to change scenes
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class Timer : MonoBehaviour
 {
     public static Timer instance;
+    public static bool isTimeUp = false;
 
     [SerializeField] TextMeshProUGUI timerText;
     public float remainingTime;
@@ -36,10 +38,13 @@ public class Timer : MonoBehaviour
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    System.Collections.IEnumerator GoToEndScene()
+    IEnumerator GoToEndScene()
     {
-        yield return new WaitForSeconds(1.0f); // Wait for 1 second
-        SceneManager.LoadScene("EndScene");   // Change "EndScene" to your actual scene name
+        // Set this to true because the timer ran out!
+        isTimeUp = true;
+
+        yield return new WaitForSeconds(1.0f);
+        SceneManager.LoadScene("EndScene");
     }
 
     // Inside Timer.cs

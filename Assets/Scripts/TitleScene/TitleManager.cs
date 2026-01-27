@@ -7,6 +7,8 @@ public class TitleManager : MonoBehaviour
     public GameObject titleText;
     public GameObject titleTextOutline;
 
+    public AudioSource audioSource;
+
     // This variable controls when the player is allowed to click
     private bool canClick = false;
 
@@ -15,7 +17,14 @@ public class TitleManager : MonoBehaviour
         SetAlpha(titleText, 0f);
         SetAlpha(titleTextOutline, 0f);
 
+        Invoke("PlayTitleSFX", 0.2f);
+
         StartCoroutine(FadeInSequence());
+    }
+
+    void PlayTitleSFX()
+    {
+        if (audioSource != null) audioSource.Play();
     }
 
     void Update()
@@ -30,6 +39,7 @@ public class TitleManager : MonoBehaviour
     IEnumerator FadeInSequence()
     {
         yield return new WaitForSeconds(1.0f);
+
 
         float currentTime = 0.0f;
         float duration = 2.0f;

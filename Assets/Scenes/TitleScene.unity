@@ -469,6 +469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   titleText: {fileID: 375283003}
   titleTextOutline: {fileID: 1510827814}
+  audioSource: {fileID: 640555320}
 --- !u!82 &640555320
 AudioSource:
   m_ObjectHideFlags: 0
@@ -481,7 +482,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b526a4c003b9fb447ab3c79e10879a8f, type: 3}
   m_Resource: {fileID: 8300000, guid: b526a4c003b9fb447ab3c79e10879a8f, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.87
   m_Pitch: 1.95
   Loop: 0

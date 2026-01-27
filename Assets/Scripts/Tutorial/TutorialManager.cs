@@ -36,7 +36,7 @@ public class TutorialManager : MonoBehaviour
     IEnumerator CrossfadeImages(float duration)
     {
         float elapsed = 0f;
-        float fadeOutDuration = 0.8f; //title fade-out
+        float fadeOutDuration = 1f; //title fade-out
 
         // --- STEP 1: Fade OUT Title Text ONLY ---
         while (elapsed < fadeOutDuration)

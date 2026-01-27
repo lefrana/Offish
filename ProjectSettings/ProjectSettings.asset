@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: "\u65E5\u672C\u96FB\u5B50"
-  productName: offish
+  companyName: "\u65E5\u672C\u96FB\u5B50\u5C02\u9580\u5B66\u6821"
+  productName: "2025\u5E74\u5EA6_\u9032\u7D1A\u5236\u4F5C_offish_\u30D6\u30EA\u30B8\u30BF\u30EC\u30D5\u30E9\u30CA"
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}

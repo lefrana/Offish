@@ -370,6 +370,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   type: 1
+  audioSource: {fileID: 0}
+  shotSfx: {fileID: 8300000, guid: a9018f8bdf61e204cae744c2bc1dad59, type: 3}
 --- !u!50 &5936625132673659688
 Rigidbody2D:
   serializedVersion: 5
