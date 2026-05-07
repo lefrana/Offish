@@ -30,13 +30,13 @@ public class GameManager : MonoBehaviour
 
     public void MoveToNextLevel()
     {
-        // 1. Turn off the current level child completely
+        //turn off the current level child completely
         levels[currentLevelIndex].SetActive(false);
 
-        // 2. Move to next index
+        //move to next index
         currentLevelIndex++;
 
-        // 3. Turn on the next level child
+        //turn on the next level child
         if (currentLevelIndex < levels.Length)
         {
             levels[currentLevelIndex].SetActive(true);
@@ -55,7 +55,6 @@ public class GameManager : MonoBehaviour
             MoveToNextLevel();
         }
 
-        // If you press 'E', it jumps directly to the Ending Scene
         if (Input.GetKeyDown(KeyCode.E))
         {
             SceneManager.LoadScene("EndScene");

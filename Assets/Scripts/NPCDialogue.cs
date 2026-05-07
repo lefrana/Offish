@@ -4,8 +4,8 @@ using System.Collections;
 
 public class NPCDialogue : MonoBehaviour
 {
-    public GameObject npc;         // The Portrait
-    public GameObject textBox;   // The Text Bubble/Background Image
+    public GameObject npc;
+    public GameObject textBox;
 
     public TextMeshProUGUI textComponent;
     public float textSpeed = 0.05f;
@@ -18,7 +18,6 @@ public class NPCDialogue : MonoBehaviour
 
     void Start()
     {
-        // Only hide if we aren't currently typing a message
         if (!isTalking)
         {
             HideNPC();
@@ -31,7 +30,6 @@ public class NPCDialogue : MonoBehaviour
     {
         StopAllCoroutines();
 
-        // --- ADD THIS ---
         gameObject.SetActive(true);
 
         if (newLines == null || newLines.Length == 0 || string.IsNullOrEmpty(newLines[0]))
@@ -64,18 +62,17 @@ public class NPCDialogue : MonoBehaviour
         textComponent.text = string.Empty;
         isTalking = true;
 
-        // 1. Start the looping SFX
-        if (audioSource != null) audioSource.Play();
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
 
         foreach (char c in lines[index].ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
-
-            // Removed audioSource.Play() from here so it doesn't restart every letter
         }
 
-        // 2. Stop the SFX immediately when the text is done
         if (audioSource != null)
         {
             audioSource.Stop();
@@ -103,11 +100,10 @@ public class NPCDialogue : MonoBehaviour
     public void HideNPC()
     {
         isTalking = false;
-        if (npc != null) npc.SetActive(false);
-        if (textBox != null) textBox.SetActive(false);
+        if (npc != null) { npc.SetActive(false); }
+        if (textBox != null) { textBox.SetActive(false); }
         textComponent.text = string.Empty;
 
-        // --- ADD THIS ---
         gameObject.SetActive(false);
     }
 }

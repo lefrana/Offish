@@ -262,7 +262,6 @@ public class LevelManager6 : MonoBehaviour
     }
     IEnumerator FadeToNextLevel()
     {
-        // --- WHITE FADE OUT (Clear to White) ---
         if (levelFade != null)
         {
             float elapsed = 0f;
@@ -273,15 +272,13 @@ public class LevelManager6 : MonoBehaviour
                 levelFade.alpha = elapsed / duration;
                 yield return null;
             }
-            levelFade.alpha = 1f; // Screen is now fully white
+            levelFade.alpha = 1f;
         }
 
-        // Standard cleanup
         if (shotGenerator != null) shotGenerator.ResetShotGenerator();
         foreach (GameObject b in activeBubbles) { if (b != null) Destroy(b); }
         activeBubbles.Clear();
 
-        // Move to next level
         GameManager gm = GetComponentInParent<GameManager>();
         if (gm != null) gm.MoveToNextLevel();
     }

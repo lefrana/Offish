@@ -22,14 +22,20 @@ public class ShotGenerator : MonoBehaviour
 
     void Update()
     {
-        // 1. If a shot is already flying, don't play sound or take input
-        if (shotSpawned) return;
+        if (shotSpawned)
+        {
+            return;
+        }
 
-        // 2. IMPORTANT: If keys haven't been spawned yet (arrowKey is null), stop here!
-        if (arrowKey == null) return;
+        if (arrowKey == null)
+        {
+            return;
+        }
 
-        // 3. If we are waiting for NPC dialogue to finish, stop here!
-        if (isWaitingForDialogue) return;
+        if (isWaitingForDialogue)
+        {
+            return;
+        }
 
         if (keyCount >= keyMax)
         {
@@ -41,7 +47,7 @@ public class ShotGenerator : MonoBehaviour
         ArrowType? input = GetInput();
         if (input == null) return;
 
-        // --- SOUND PLAYS ONLY IF WE PASS THE CHECKS ABOVE ---
+        //play sound
         if (audioSource != null)
         {
             audioSource.Play();
@@ -74,7 +80,7 @@ public class ShotGenerator : MonoBehaviour
             Vector2 pos = basePos + new Vector2(i * spacing, 0.0f);
             GameObject obj = Instantiate(prefab, pos, Quaternion.identity);
 
-            // IMPORTANT: Force the tag here so LevelManager can always find it
+            //force tag
             obj.tag = "Arrows";
 
             keyObjects[i] = obj;
@@ -124,8 +130,6 @@ public class ShotGenerator : MonoBehaviour
     }
     public void OnShotFinished()
     {
-        // If we hit a bubble, DO NOT reset keys yet. 
-        // The LevelManager will handle the reset after the NPC finishes.
         if (isWaitingForDialogue)
         {
             return;
@@ -142,7 +146,6 @@ public class ShotGenerator : MonoBehaviour
         {
             for (int i = 0; i < arrowKey.Length; i++)
             {
-                // Check if it exists before destroying
                 if (arrowKey[i] != null && arrowKey[i].gameObject != null)
                 {
                     Destroy(arrowKey[i].gameObject);
@@ -157,11 +160,8 @@ public class ShotGenerator : MonoBehaviour
 
     public void ResetShotGenerator()
     {
-        // 1. Stop any shots currently being fired
-        shotSpawned = true; // Locking it prevents new inputs
+        shotSpawned = true;
 
-        // 2. Find and destroy any shots/arrows currently in the air
-        // Replace "Shot" and "Arrows" with whatever your Tags actually are
         GameObject[] oldShots = GameObject.FindGameObjectsWithTag("Shot");
         foreach (GameObject s in oldShots) Destroy(s);
 

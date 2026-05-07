@@ -34,8 +34,11 @@ public class Dialogue : MonoBehaviour
         textComponent.text = string.Empty;
         charaAnim.SetBool("isTalking", true);
 
-        // --- START AUDIO ---
-        if (audioSource != null) audioSource.Play();
+
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
 
         string currentLine = lines[index];
         int i = 0;
@@ -60,8 +63,10 @@ public class Dialogue : MonoBehaviour
             yield return new WaitForSeconds(textSpeed);
         }
 
-        // --- STOP AUDIO ---
-        if (audioSource != null) audioSource.Stop();
+        if (audioSource != null)
+        {
+            audioSource.Stop();
+        }
 
         charaAnim.SetBool("isTalking", false);
 

@@ -27,6 +27,11 @@ public class TutorialManager : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
         if (canClick && Input.anyKeyDown)
         {
             SceneManager.LoadScene("GameScene");
@@ -38,7 +43,7 @@ public class TutorialManager : MonoBehaviour
         float elapsed = 0f;
         float fadeOutDuration = 1f; //title fade-out
 
-        // --- STEP 1: Fade OUT Title Text ONLY ---
+        //fade out title text
         while (elapsed < fadeOutDuration)
         {
             elapsed += Time.deltaTime;
@@ -46,7 +51,6 @@ public class TutorialManager : MonoBehaviour
 
             SetAlpha(titleText, alpha);
             SetAlpha(titleTextOutline, alpha);
-            // Note: We don't touch the fish yet!
             yield return null;
         }
 
@@ -56,19 +60,15 @@ public class TutorialManager : MonoBehaviour
         titleText.SetActive(false);
         titleTextOutline.SetActive(false);
 
-        // --- STEP 2: Tiny Pause (Optional, for better feel) ---
         yield return new WaitForSeconds(0.5f);
 
-        // --- STEP 3: Crossfade Yellow Fish to Normal Fish ---
-        elapsed = 0f; // Reset timer for the next part
+        elapsed = 0f; //reset timer for next part
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             float alpha = elapsed / duration;
 
-            // Fade Yellow OUT
             SetAlpha(yellowFish, 1f - alpha);
-            // Fade Normal Fish IN
             SetAlpha(fish, alpha);
 
             yield return null;
@@ -94,7 +94,7 @@ public class TutorialManager : MonoBehaviour
             //"currently looking for a job on land."
         });
 
-        // Wait for the text to finish/be read before showing the tutorial overlay
+        //wait for the text to finish/be read before showing the tutorial overlay
         yield return new WaitForSeconds(8.0f);
 
         StartCoroutine(FadeInSequence());
@@ -134,7 +134,6 @@ public class TutorialManager : MonoBehaviour
         canClick = true;
     }
 
-    // Your single, universal alpha controller
     void SetAlpha(GameObject obj, float alpha)
     {
         if (obj == null) return;

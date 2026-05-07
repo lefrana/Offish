@@ -12,12 +12,11 @@ public class EndingManager : MonoBehaviour
 
     public CanvasGroup levelFade;
 
-    // ADD THIS: Check this in the Inspector to test the Game Over version
+
     public bool isGameOver = false;
 
     void OnEnable()
     {
-        // Look at the Timer script to see if the time ran out
         isGameOver = Timer.isTimeUp;
         Timer.isTimeUp = false;
 
@@ -26,14 +25,14 @@ public class EndingManager : MonoBehaviour
 
     IEnumerator StartingSequence()
     {
-        // 1. SETUP: Hide everything
+        //hide everything at start
         npcDialogue.HideNPC();
         gameOverObj.SetActive(false);
         gameClearObj.SetActive(false);
         dialogue.gameObject.SetActive(false);
         npcDialogue.gameObject.SetActive(false);
 
-        // 2. FADE IN (White to Clear)
+        //fade in
         if (levelFade != null)
         {
             float elapsed = 0f;
@@ -47,20 +46,18 @@ public class EndingManager : MonoBehaviour
             levelFade.alpha = 0f;
         }
 
-        // --- 3. THE FIX: ONLY PLAY DIALOGUE IF NOT GAME OVER ---
         if (!isGameOver)
         {
             yield return StartCoroutine(DialogueSequence());
         }
         else
         {
-            // If it IS Game Over, just wait a moment in silence
             yield return new WaitForSeconds(1.0f);
         }
 
         yield return new WaitForSeconds(0.5f);
 
-        // 4. FADE OUT (Clear back to White)
+        //fade out
         if (levelFade != null)
         {
             float elapsed = 0f;
@@ -76,7 +73,7 @@ public class EndingManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);
 
-        // 5. THE CHOICE
+        //go to game over screen
         if (isGameOver)
         {
             gameOverObj.SetActive(true);
@@ -97,7 +94,6 @@ public class EndingManager : MonoBehaviour
 
     IEnumerator DialogueSequence()
     {
-        // Your original dialogue code stays the same
         npcDialogue.SetDialogue(new string[]
         {
             "Ç≈ÇÕÅAñ{ì˙ÇÃñ ê⁄ÇÕà»è„Ç≈Ç∑ÅB",

@@ -40,7 +40,7 @@ public class LevelManager7 : MonoBehaviour
                 levelFade.alpha = 1f - (elapsed / duration);
                 yield return null;
             }
-            levelFade.alpha = 0f; // Ensure it is fully clear
+            levelFade.alpha = 0f;
         }
 
         //start dialogue sequence
@@ -250,7 +250,6 @@ public class LevelManager7 : MonoBehaviour
     }
     IEnumerator FadeToNextLevel()
     {
-        // --- WHITE FADE OUT (Clear to White) ---
         if (levelFade != null)
         {
             float elapsed = 0f;
@@ -261,7 +260,7 @@ public class LevelManager7 : MonoBehaviour
                 levelFade.alpha = elapsed / duration;
                 yield return null;
             }
-            levelFade.alpha = 1f; // Screen is now fully white
+            levelFade.alpha = 1f;
         }
 
         // Standard cleanup

@@ -39,35 +39,39 @@ public class BubbleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // We check for the key press here
+        //when shoot bubble
         if (shotInside && Input.GetKeyDown(KeyCode.X))
         {
             if (isOnTop())
             {
-                // Start the sequence that includes a delay
                 StartCoroutine(ShotSequence());
             }
         }
     }
 
-    // This is the sequence that handles the delay
     IEnumerator ShotSequence()
     {
-        // 1. Play sound immediately
+        //play shot sfx
         PlayShotSound();
-        Freeze();
+        Freeze(); //freeze the shot bubble in place
 
-        // 2. Stop the generator logic
-        ShotGenerator sg = Object.FindFirstObjectByType<ShotGenerator>();
-        if (sg != null) sg.isWaitingForDialogue = true;
+        //stop the shot system
+        ShotGenerator sg = FindFirstObjectByType<ShotGenerator>();
+        if (sg != null)
+        {
+            sg.isWaitingForDialogue = true;
+        }
 
-        // 3. Remove the arrow
+        //destroy shot
         GameObject shot = GameObject.FindGameObjectWithTag("Shot");
-        if (shot != null) Destroy(shot);
+        if (shot != null)
+        {
+            Destroy(shot);
+        }
 
         yield return new WaitForSeconds(0.3f);
 
-        // 5. Show the text AFTER the delay
+        //bubble text
         ShowText();
     }
 
@@ -82,15 +86,15 @@ public class BubbleController : MonoBehaviour
     void ShowText()
     {
         //level 1
-        LevelManager1 manager1 = Object.FindFirstObjectByType<LevelManager1>();
+        LevelManager1 manager1 = FindFirstObjectByType<LevelManager1>();
         if (manager1 != null)
         {
             manager1.CheckAnswer(type, gameObject);
-            return; // Stop here if found
+            return;
         }
 
         //level 2
-        LevelManager2 manager2 = Object.FindFirstObjectByType<LevelManager2>();
+        LevelManager2 manager2 = FindFirstObjectByType<LevelManager2>();
         if (manager2 != null)
         {
             manager2.CheckAnswer(type, gameObject);
@@ -98,7 +102,7 @@ public class BubbleController : MonoBehaviour
         }
 
         //level 3
-        LevelManager3 manager3 = Object.FindFirstObjectByType<LevelManager3>();
+        LevelManager3 manager3 = FindFirstObjectByType<LevelManager3>();
         if (manager3 != null)
         {
             manager3.CheckAnswer(type, gameObject);
@@ -106,7 +110,7 @@ public class BubbleController : MonoBehaviour
         }
 
         //level 4
-        LevelManager4 manager4 = Object.FindFirstObjectByType<LevelManager4>();
+        LevelManager4 manager4 = FindFirstObjectByType<LevelManager4>();
         if (manager4 != null)
         {
             manager4.CheckAnswer(type, gameObject);
@@ -114,7 +118,7 @@ public class BubbleController : MonoBehaviour
         }
 
         //level 5
-        LevelManager5 manager5 = Object.FindFirstObjectByType<LevelManager5>();
+        LevelManager5 manager5 = FindFirstObjectByType<LevelManager5>();
         if (manager5 != null)
         {
             manager5.CheckAnswer(type, gameObject);
@@ -122,7 +126,7 @@ public class BubbleController : MonoBehaviour
         }
 
         //level 6
-        LevelManager6 manager6 = Object.FindFirstObjectByType<LevelManager6>();
+        LevelManager6 manager6 = FindFirstObjectByType<LevelManager6>();
         if (manager6 != null)
         {
             manager6.CheckAnswer(type, gameObject);
@@ -130,7 +134,7 @@ public class BubbleController : MonoBehaviour
         }
 
         //level 7
-        LevelManager7 manager7 = Object.FindFirstObjectByType<LevelManager7>();
+        LevelManager7 manager7 = FindFirstObjectByType<LevelManager7>();
         if (manager7 != null)
         {
             manager7.CheckAnswer(type, gameObject);
@@ -138,7 +142,7 @@ public class BubbleController : MonoBehaviour
         }
 
         //level 8
-        LevelManager8 manager8 = Object.FindFirstObjectByType<LevelManager8>();
+        LevelManager8 manager8 = FindFirstObjectByType<LevelManager8>();
         if (manager8 != null)
         {
             manager8.CheckAnswer(type, gameObject);
@@ -178,7 +182,7 @@ public class BubbleController : MonoBehaviour
         if (rb != null)
         {
             rb.linearVelocity = Vector2.zero;
-            rb.simulated = false; // Optional: prevents it from being pushed by others while frozen
+            rb.simulated = false; //prevents from being pushed by others while frozen
         }
     }
 
